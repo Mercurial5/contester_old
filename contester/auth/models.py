@@ -8,9 +8,9 @@ def setup_default_user_db(db: SQLAlchemy):
         email = db.Column(db.String(120), unique=True, nullable=False)
         password = db.Column(db.String(255), unique=True, nullable=False)
 
-        def __init__(self, id: int, username: str, email: str):
-            self.id = id
+        def __init__(self, username: str, password: str, email: str):
             self.username = username
+            self.password = password
             self.email = email
 
         def __repr__(self):
@@ -22,5 +22,14 @@ def setup_default_user_db(db: SQLAlchemy):
 
         def find_user_by_username(self, username: str) -> Users:
             return Users.query.filter(Users.username == username).first()
+
+        def find_user_by_email(self, email: str) -> Users:
+            return Users.query.filter(Users.email == email).first()
+
+        def create_user(self, username: str, password: str, email: str):
+            user = Users(username, password, email)
+            db.session.add(user)
+            db.session.commit()
+
 
     return UserDBO()
