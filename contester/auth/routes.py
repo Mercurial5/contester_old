@@ -97,4 +97,6 @@ def confirm_email(token):
     users_db = current_app.config['users.db']
     users_db.create_user(unverified_user.username, unverified_user.password, unverified_user.email)
 
+    unverified_users_db.delete_unverified_user_by_email(email)
+
     return redirect(url_for('auth_bp.login'))
