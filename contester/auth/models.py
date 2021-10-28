@@ -22,6 +22,11 @@ def setup_unverified_users_db(db: SQLAlchemy):
             db.session.add(unverified_user)
             db.session.commit()
 
+        def find_user_by_email(self, email: str) -> UnverifiedUsers:
+            return UnverifiedUsers.query.filter(UnverifiedUsers.email == email).first()
+
+    return UnverifiedUsersDBO()
+
 
 def setup_users_db(db: SQLAlchemy):
     class Users(db.Model):
