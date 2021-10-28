@@ -1,4 +1,4 @@
-from contester.auth import setup_default_user_db
+from contester.auth import setup_users_db, setup_unverified_users_db
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 from flask import Flask
@@ -11,10 +11,12 @@ def create_app() -> Flask:
     app = Flask(__name__)
 
     with app.app_context():
+        app.config['SECRET_KEY'] = environ.get('SECRET_KEY')
         app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('SQLALCHEMY_DATABASE_URI')
         db = SQLAlchemy(app)
 
-        app.config['users.db'] = setup_default_user_db(db)
+        app.config['users.db'] = setup_users_db(db)
+        app.config['unverified_users.db'] = setup_unverified_users_db(db)
 
         db.create_all()
 
