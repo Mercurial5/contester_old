@@ -40,9 +40,8 @@ def login():
         if not is_password_correct:
             return render_template('auth/login.html')
 
-        print(user)
         session['user'] = ModelEncoder().encode(user)
-        return 'You have passed.'
+        return redirect(url_for('problems_bp.archive'))
 
     return render_template('auth/login.html')
 
