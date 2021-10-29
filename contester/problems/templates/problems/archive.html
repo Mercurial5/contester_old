@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Login V17</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="{{ url_for('auth_bp.static', filename='images/icons/favicon.ico') }}"/>
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('auth_bp.static', filename='vendor/bootstrap/css/bootstrap.min.css') }}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('auth_bp.static', filename='fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('auth_bp.static', filename='fonts/Linearicons-Free-v1.0.0/icon-font.min.css') }}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('auth_bp.static', filename='vendor/animate/animate.css') }}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('auth_bp.static', filename='vendor/css-hamburgers/hamburgers.min.css') }}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('auth_bp.static', filename='vendor/animsition/css/animsition.min.css') }}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('auth_bp.static', filename='vendor/select2/select2.min.css') }}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('auth_bp.static', filename='vendor/daterangepicker/daterangepicker.css') }}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('auth_bp.static', filename='css/util.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('auth_bp.static', filename='css/main.css') }}">
+<!--===============================================================================================-->
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">Home</a>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Archive<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Rating</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">Disabled</a>
+          </li>
+        </ul>
+        <ul>
+            <li class="nav-item dropdown">
+            <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Very long Dropdown message
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{{ url_for('auth_bp.logout') }}">Logout</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+<!--===============================================================================================-->
+    <script src="{{ url_for('auth_bp.static', filename='vendor/jquery/jquery-3.2.1.min.js') }}"></script>
+<!--===============================================================================================-->
+    <script src="{{ url_for('auth_bp.static', filename='vendor/animsition/js/animsition.min.js') }}"></script>
+<!--===============================================================================================-->
+    <script src="{{ url_for('auth_bp.static', filename='vendor/bootstrap/js/popper.js') }}"></script>
+    <script src="{{ url_for('auth_bp.static', filename='vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+<!--===============================================================================================-->
+    <script src="{{ url_for('auth_bp.static', filename='vendor/select2/select2.min.js') }}"></script>
+	<script>
+		$(".selection-2").select2({
+			minimumResultsForSearch: 20,
+			dropdownParent: $('#dropDownSelect1')
+		});
+	</script>
+<!--===============================================================================================-->
+	<script src="{{ url_for('auth_bp.static', filename='vendor/daterangepicker/moment.min.js') }}"></script>
+	<script src="{{ url_for('auth_bp.static', filename='vendor/daterangepicker/daterangepicker.js') }}"></script>
+<!--===============================================================================================-->
+    <script src="{{ url_for('auth_bp.static', filename='vendor/countdowntime/countdowntime.js') }}"></script>
+<!--===============================================================================================-->
+	<script src="{{ url_for('auth_bp.static', filename='js/main.js') }}"></script>
+
+</body>
+</html>
