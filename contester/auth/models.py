@@ -1,4 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
+from json import JSONEncoder
+from typing import Any
+import jsonpickle
 
 
 def setup_unverified_users_db(db: SQLAlchemy):
@@ -47,6 +50,9 @@ def setup_users_db(db: SQLAlchemy):
         def __repr__(self):
             return '<User %r>' % self.username
 
+        def to_json(self):
+            return jsonpickle.encode(self)
+
     class UsersDBO(object):
         def find_user_by_id(self, user_id: int) -> Users:
             return Users.query.filter(Users.id == user_id).first()
@@ -63,3 +69,8 @@ def setup_users_db(db: SQLAlchemy):
             db.session.commit()
 
     return UsersDBO()
+
+
+class ModelEncoder(JSONEncoder):
+    def default(self, obj: Any) -> Any:
+        return obj.to_json()
