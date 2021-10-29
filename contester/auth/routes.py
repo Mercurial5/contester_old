@@ -1,11 +1,11 @@
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired, BadTimeSignature
 from flask import request, render_template, current_app, redirect, url_for
-from contester.auth.models import ModelEncoder
 from email.message import EmailMessage
 from passlib.hash import sha256_crypt
 from flask import Blueprint
 from os import environ
 import smtplib
+import json
 
 app = Blueprint('auth_bp', __name__, template_folder='templates', static_folder='static')
 
@@ -40,7 +40,7 @@ def login():
         if not is_password_correct:
             return render_template('auth/login.html')
 
-        session['user'] = ModelEncoder().encode(user)
+        session['user'] = user.as_dict()
         return redirect(url_for('problems_bp.archive'))
 
     return render_template('auth/login.html')
