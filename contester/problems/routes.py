@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, current_app, redirect, url_for
+import json
 
 
 app = Blueprint('problems_bp', __name__, template_folder='templates', static_folder='static')
@@ -7,8 +8,9 @@ app = Blueprint('problems_bp', __name__, template_folder='templates', static_fol
 @app.route('/archive')
 def archive():
     session = current_app.config['session']
-    print(session)
+
     if 'user' in session:
-        return render_template('problems/archive.html')
+        user = session['user']
+        return render_template('problems/archive.html', user=user)
     else:
         return redirect(url_for('auth_bp.login'))
