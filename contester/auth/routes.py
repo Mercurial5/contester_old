@@ -1,5 +1,6 @@
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired, BadTimeSignature
 from flask import request, render_template, current_app, redirect, url_for
+from contester.auth.models import ModelEncoder
 from email.message import EmailMessage
 from passlib.hash import sha256_crypt
 from flask import Blueprint
@@ -24,6 +25,7 @@ def record(state):
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
+        session = current_app.config['session']
         users_db = current_app.config['users.db']
 
         username = request.form.get('username')
@@ -38,6 +40,8 @@ def login():
         if not is_password_correct:
             return render_template('auth/login.html')
 
+        print(user)
+        session['user'] = ModelEncoder().encode(user)
         return 'You have passed.'
 
     return render_template('auth/login.html')
@@ -98,5 +102,15 @@ def confirm_email(token):
     users_db.create_user(unverified_user.username, unverified_user.password, unverified_user.email)
 
     unverified_users_db.delete_unverified_user_by_email(email)
+
+    return redirect(url_for('auth_bp.login'))
+
+
+@app.route('/logout', methods=['POST', 'GET'])
+def logout():
+    session = current_app.config['session']
+
+    if 'user' in session:
+        session.pop('user')
 
     return redirect(url_for('auth_bp.login'))
