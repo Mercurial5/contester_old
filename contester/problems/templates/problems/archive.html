@@ -46,7 +46,7 @@
         <ul>
             <li class="nav-item dropdown">
             <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Very long Dropdown message
+                {{ user.username }}
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="#">Action</a>
@@ -68,12 +68,6 @@
     <script src="{{ url_for('auth_bp.static', filename='vendor/bootstrap/js/bootstrap.min.js') }}"></script>
 <!--===============================================================================================-->
     <script src="{{ url_for('auth_bp.static', filename='vendor/select2/select2.min.js') }}"></script>
-	<script>
-		$(".selection-2").select2({
-			minimumResultsForSearch: 20,
-			dropdownParent: $('#dropDownSelect1')
-		});
-	</script>
 <!--===============================================================================================-->
 	<script src="{{ url_for('auth_bp.static', filename='vendor/daterangepicker/moment.min.js') }}"></script>
 	<script src="{{ url_for('auth_bp.static', filename='vendor/daterangepicker/daterangepicker.js') }}"></script>
