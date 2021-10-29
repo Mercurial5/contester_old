@@ -50,8 +50,8 @@ def setup_users_db(db: SQLAlchemy):
         def __repr__(self):
             return '<User %r>' % self.username
 
-        def to_json(self):
-            return jsonpickle.encode(self)
+        def as_dict(self):
+            return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
     class UsersDBO(object):
         def find_user_by_id(self, user_id: int) -> Users:
@@ -69,8 +69,3 @@ def setup_users_db(db: SQLAlchemy):
             db.session.commit()
 
     return UsersDBO()
-
-
-class ModelEncoder(JSONEncoder):
-    def default(self, obj: Any) -> Any:
-        return obj.to_json()
