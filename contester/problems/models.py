@@ -26,8 +26,8 @@ def setup_samples_db(db: SQLAlchemy):
     class Samples(db.Model):
         id = db.Column(db.Integer, primary_key=True)
         problem_id = db.Column(db.Integer, nullable=False, index=True)
-        input = db.Column(db.String)
-        output = db.Column(db.String, nullable=False)
+        input = db.Column(db.Text)
+        output = db.Column(db.Text, nullable=False)
 
         def __repr__(self):
             return '<Samples %d>' % self.id
