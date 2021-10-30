@@ -1,7 +1,6 @@
 from flask import Blueprint, render_template, current_app, redirect, url_for
 import json
 
-
 app = Blueprint('problems_bp', __name__, template_folder='templates', static_folder='static')
 
 
@@ -31,4 +30,7 @@ def problem_page(problem_id):
 
     user = session['user']
     problem = problems_db.get_problem_by_id(problem_id)
-    return render_template('problems/problem_page.html', problem=problem, user=user)
+
+    payload = json.dumps({"id": problem.id})
+
+    return render_template('problems/problem_page.html', problem=problem, user=user, payload=payload)

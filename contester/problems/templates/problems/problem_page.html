@@ -13,13 +13,16 @@
         </div>
     </div>
     <div class="side-wrapper bg-light rounded border ml-5">
-
+        
     </div>
 
 
     <script src="{{ url_for('problems_bp.static', filename='codemirror/lib/codemirror.js') }}"></script>
     <script src="{{ url_for('problems_bp.static', filename='codemirror/mode/clike/clike.js') }}"></script>
     <script src="{{ url_for('problems_bp.static', filename='codemirror/addon/edit/closebrackets.js') }}"></script>
+    <script>
+        window.PAYLOAD = {{ payload|safe }}
+      </script>
     <script src="{{ url_for('problems_bp.static', filename='js/backend.js') }}"></script>
 </main> 
 {% endblock %}
