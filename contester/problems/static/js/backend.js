@@ -13,7 +13,7 @@ function submitClick() {
     }
 
     let xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://" + PAYLOAD.host + ":5000/compiler/check_code");
+    xhr.open("POST", "http://" + PAYLOAD.host + "/compiler/check_code");
 
     let data = JSON.stringify({
         "problem_id": PAYLOAD.id,
