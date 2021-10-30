@@ -242,17 +242,6 @@ iframe {
   padding: 305px 65px 40px 65px;
 }
 
-.register100-form {
-  width: 50%;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  flex-wrap: wrap;
-  padding: 253px 65px 40px 65px;
-}
-
 .login100-form-title {
   font-family: Poppins-Regular;
   font-size: 20px;
@@ -500,3 +489,52 @@ input.input100 {
 
 
 
+/*============================My css===============================*/
+
+.register100-form {
+  width: 50%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 253px 65px 40px 65px;
+}
+
+.slow-hover {
+  -webkit-transition: all 500ms ease;
+  -moz-transition: all 500ms ease;
+  -ms-transition: all 500ms ease;
+  -o-transition: all 500ms ease;
+  transition: all 500ms ease;
+}
+
+.green-text-hover:hover {
+  color: #1ba94c;
+}
+
+.problem-wrapper {
+  width: 1000px;
+  height: 900px;
+
+}
+
+.side-wrapper {
+  width: 400px;
+  height: 900px;
+}
+
+.notInfiniteCodeMirror {
+  height: 1000px !important;
+}
+
+.btn:focus,.btn:active {
+  outline: none !important;
+  box-shadow: none;
+}
+
+.CodeMirror {
+  line-height: 1.2em;
+  height: 500px;
+}
