@@ -11,6 +11,24 @@ def archive():
 
     if 'user' in session:
         user = session['user']
-        return render_template('problems/archive.html', user=user)
+
+        problems_db = current_app.config['problems.db']
+        problems = problems_db.get_first_n_problems(10)
+
+        return render_template('problems/archive.html', user=user, problems=problems)
     else:
         return redirect(url_for('auth_bp.login'))
+
+
+@app.route('/problem_page/<problem_id>')
+def problem_page(problem_id):
+    session = current_app.config['session']
+
+    if 'user' not in session:
+        return redirect(url_for('auth_bp.login'))
+
+    problems_db = current_app.config['problems.db']
+
+    user = session['user']
+    problem = problems_db.get_problem_by_id(problem_id)
+    return render_template('problems/problem_page.html', problem=problem, user=user)
