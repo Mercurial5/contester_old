@@ -3,3 +3,4 @@ venv
 .idea
 
 contester/compiler/temp/*
+!contester/compiler/temp/.gitkeep
