@@ -5,10 +5,6 @@ let editor2 = CodeMirror.fromTextArea(document.getElementById("editor"), {
     autoCloseBrackets: true
 }).doc;
 
-//;
-
-console.log(editor2);
-
 function submitClick() {
     let code = editor2.getValue("\n");
     if (code === '') {
@@ -20,11 +16,22 @@ function submitClick() {
     xhr.open("POST", "http://127.0.0.1:5000/compiler/check_code");
 
     let data = JSON.stringify({
-        "problem_id": 1,
+        "problem_id": PAYLOAD.id,
         "code": code
     });
 
+
     xhr.send(data);
+
+    xhr.onload = function() {
+        let result = JSON.parse(xhr.responseText);
+        if (result['accepted']) {
+            alert("Ну чё, заебись, аккептед.");
+        } else {
+            alert("Лох))0)");
+        }
+    }
+
 }
 
 
