@@ -1,7 +1,4 @@
 from flask_sqlalchemy import SQLAlchemy
-from json import JSONEncoder
-from typing import Any
-import jsonpickle
 
 
 def setup_unverified_users_db(db: SQLAlchemy):

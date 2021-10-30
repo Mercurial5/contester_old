@@ -5,7 +5,6 @@ from passlib.hash import sha256_crypt
 from flask import Blueprint
 from os import environ
 import smtplib
-import json
 
 app = Blueprint('auth_bp', __name__, template_folder='templates', static_folder='static')
 
@@ -24,8 +23,13 @@ def record(state):
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    session = current_app.config['session']
+
+    if 'user' in session:
+        return redirect(url_for('problems_bp.archive'))
+
     if request.method == 'POST':
-        session = current_app.config['session']
+
         users_db = current_app.config['users.db']
 
         username = request.form.get('username')
@@ -48,6 +52,11 @@ def login():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    session = current_app.config['session']
+
+    if 'user' in session:
+        return redirect(url_for('problems_bp.archive'))
+
     if request.method == 'POST':
         unverified_users_db = current_app.config['unverified_users.db']
         users_db = current_app.config['users.db']
