@@ -1,5 +1,5 @@
 from contester.auth import setup_users_db, setup_unverified_users_db
-from contester.problems import setup_problems_db
+from contester.problems import setup_problems_db, setup_samples_db
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, session
 from dotenv import load_dotenv
@@ -20,6 +20,7 @@ def create_app() -> Flask:
         app.config['users.db'] = setup_users_db(db)
         app.config['unverified_users.db'] = setup_unverified_users_db(db)
         app.config['problems.db'] = setup_problems_db(db)
+        app.config['samples.db'] = setup_samples_db(db)
 
         db.create_all()
 
@@ -28,5 +29,8 @@ def create_app() -> Flask:
 
         from contester.problems import problems_app
         app.register_blueprint(problems_app, url_prefix='/problems')
+
+        from contester.compiler import compiler_app
+        app.register_blueprint(compiler_app, url_prefix='/compiler')
 
         return app
