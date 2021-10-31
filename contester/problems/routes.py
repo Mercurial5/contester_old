@@ -28,15 +28,18 @@ def problem_page(problem_id):
 
     problems_db = current_app.config['problems.db']
     samples_db = current_app.config['samples.db']
+    attempts_db = current_app.config['attempts.db']
 
     user = session['user']
     problem = problems_db.get_problem_by_id(problem_id)
 
     samples = samples_db.get_first_n_samples(problem_id, problem.samples_count)
+    attempts = attempts_db.get_attempts(user['id'], problem_id)
 
     payload = json.dumps({'problem_id': problem.id, 'host': request.host})
 
-    return render_template('problems/problem_page.html', problem=problem, user=user, samples=samples, payload=payload)
+    return render_template('problems/problem_page.html', problem=problem, user=user, samples=samples, payload=payload,
+                           attempts=attempts)
 
 
 @app.route('/save_attempt', methods=['POST'])
