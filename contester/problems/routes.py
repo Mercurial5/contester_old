@@ -36,6 +36,8 @@ def problem_page(problem_id):
 
     samples = samples_db.get_first_n_samples(problem_id, problem.samples_count)
     attempts = attempts_db.get_attempts(user['id'], problem_id)
+    attempts = [give_color_to_attempt(attempt) for attempt in attempts]
+
     attempt_counts = attempts_db.get_attempts_count(user['id'], problem_id)
 
     payload = json.dumps({'problem_id': problem.id, 'host': request.host})
@@ -56,3 +58,16 @@ def save_attempt():
 
     attempts_db.save_new_attempt(user_id, post_data)
     return {}
+
+
+def give_color_to_attempt(attempt):
+    if attempt.status is False:
+        color_name = 'error-attempt'
+    elif attempt.accepted is True:
+        color_name = 'accepted-attempt'
+    else:
+        color_name = 'wrong-attempt'
+
+    attempt.color_name = color_name
+
+    return attempt
