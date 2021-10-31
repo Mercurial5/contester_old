@@ -516,8 +516,7 @@ input.input100 {
 
 .problem-wrapper {
   width: 1000px;
-  height: 1200px;
-
+  min-height: 950px;
 }
 
 .side-wrapper {

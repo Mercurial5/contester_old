@@ -23,12 +23,16 @@
             </div>
         {% endfor %}
 
-        <div class="form-group m-5 border">
-            <textarea class="form-control notInfiniteCodeMirror" id="editor"></textarea>
+        <div class="form-group m-5">
+            <div class="border">
+                <textarea class="form-control notInfiniteCodeMirror" id="editor"></textarea>
+            </div>
+             <div class="d-flex justify-content-center mt-5">
+                <button type="button" class="btn btn-secondary btn-lg" id="submit-button" onclick="submitClick()">Submit</button>
+            </div>
         </div>
-        <div class="d-flex justify-content-center">
-            <button type="button" class="btn btn-secondary btn-lg" id="submit-button" onclick="submitClick()">Submit</button>
-        </div>
+
+
     </div>
     <div class="side-wrapper bg-light rounded border ml-5">
         <div class="border text-center py-3">
