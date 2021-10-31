@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
 
 def setup_unverified_users_db(db: SQLAlchemy):
@@ -7,6 +8,7 @@ def setup_unverified_users_db(db: SQLAlchemy):
         username = db.Column(db.String(80), unique=True, nullable=False)
         email = db.Column(db.String(120), unique=True, nullable=False)
         password = db.Column(db.String(255), unique=True, nullable=False)
+        created_time = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
         def __init__(self, username: str, password: str, email: str):
             self.username = username
@@ -38,6 +40,8 @@ def setup_users_db(db: SQLAlchemy):
         username = db.Column(db.String(80), unique=True, nullable=False)
         email = db.Column(db.String(120), unique=True, nullable=False)
         password = db.Column(db.String(255), unique=True, nullable=False)
+        solved_tasks_count = db.Column(db.Integer, nullable=False, default=0)
+        created_time = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
         def __init__(self, username: str, password: str, email: str):
             self.username = username
