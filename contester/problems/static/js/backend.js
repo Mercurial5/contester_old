@@ -60,7 +60,7 @@ function save_attempt(problem_id, result, current_timestamp, code) {
 }
 
 function add_attempt(current_date) {
-    let string_attempt = '<div class="attempt-info border">\n' +
+    let string_attempt = '<a class="attempt-info border">\n' +
         '                    <div class="two-inline-blocks pb-3">\n' +
         '                        <div class="pl-4 pt-3">\n' +
         '                            <div class="attempt-result">\n' +
@@ -76,7 +76,7 @@ function add_attempt(current_date) {
         '                            ' + current_date + '\n' +
         '                        </div>\n' +
         '                    </div>\n' +
-        '                </div>';
+        '                </a>';
 
     let attempts_block = document.getElementById('attempts-wrapper');
     let attempt = document.createElement('div');
@@ -109,7 +109,7 @@ function update_attempt(result, current_date) {
         }
     }
 
-    let string_attempt = '<div class="attempt-info border ' + color_name + '">\n' +
+    let string_attempt = '<a class="attempt-info border ' + color_name + '">\n' +
         '                    <div class="two-inline-blocks pb-3">\n' +
         '                        <div class="pl-4 pt-3">\n' +
         '                            <div class="attempt-result">\n' +
@@ -125,7 +125,7 @@ function update_attempt(result, current_date) {
         '                            ' + current_date + '\n' +
         '                        </div>\n' +
         '                    </div>\n' +
-        '                </div>';
+        '                </a>';
 
     let new_attempt = document.createElement('div');
     new_attempt.innerHTML = string_attempt;
