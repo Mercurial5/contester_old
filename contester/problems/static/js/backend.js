@@ -29,13 +29,6 @@ function submitClick() {
         let result = JSON.parse(xhr.responseText);
 
         save_attempt(PAYLOAD.problem_id, result, current_date / 1000, code);
-
-        if (result['accepted']) {
-            alert("Ну чё, заебись, аккептед.");
-        } else {
-            alert("Лох))0)");
-        }
-
         update_attempt(result, get_date_from_Date(current_date));
     }
 
