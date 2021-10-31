@@ -5,6 +5,7 @@ let editor2 = CodeMirror.fromTextArea(document.getElementById("editor"), {
     autoCloseBrackets: true
 }).doc;
 
+
 function submitClick() {
     let code = editor2.getValue("\n");
     if (code === '') {
@@ -28,8 +29,8 @@ function submitClick() {
     xhr.onload = function() {
         let result = JSON.parse(xhr.responseText);
 
-        save_attempt(PAYLOAD.problem_id, result, current_date / 1000, code);
-        update_attempt(result, get_date_from_Date(current_date));
+        let attempt_id = save_attempt(PAYLOAD.problem_id, result, current_date / 1000, code);
+        update_attempt(result, get_date_from_Date(current_date), attempt_id);
     }
 
 }
@@ -50,11 +51,17 @@ function save_attempt(problem_id, result, current_timestamp, code) {
     });
 
     xhr.send(data);
+    let attempt_id;
+    xhr.onload = function () {
+        let result = JSON.parse(xhr.responseText);
+        attempt_id = result['attempt_id'];
+    }
+    return attempt_id;
 }
 
 function add_attempt(current_date) {
-    let string_attempt = '<a class="attempt-info border">\n' +
-        '                    <div class="two-inline-blocks pb-3">\n' +
+    let string_attempt = '<div class="attempt-info border">\n' +
+        '                    <a class="two-inline-blocks pb-3">\n' +
         '                        <div class="pl-4 pt-3">\n' +
         '                            <div class="attempt-result">\n' +
         '                                \n' +
@@ -68,8 +75,8 @@ function add_attempt(current_date) {
         '                        <div class="attempt-date pt-3 pr-4">\n' +
         '                            ' + current_date + '\n' +
         '                        </div>\n' +
-        '                    </div>\n' +
-        '                </a>';
+        '                    </a>\n' +
+        '                </div>';
 
     let attempts_block = document.getElementById('attempts-wrapper');
     let attempt = document.createElement('div');
@@ -81,7 +88,8 @@ function add_attempt(current_date) {
     }
 }
 
-function update_attempt(result, current_date) {
+function update_attempt(result, current_date, attempt_id) {
+    let url_to_attempt = "http://" + PAYLOAD.host + "/problems/show_attempt/" + attempt_id;
     let attempts_block = document.getElementById('attempts-wrapper');
     let last_attempt = attempts_block.firstChild;
 
@@ -102,8 +110,8 @@ function update_attempt(result, current_date) {
         }
     }
 
-    let string_attempt = '<a class="attempt-info border ' + color_name + '">\n' +
-        '                    <div class="two-inline-blocks pb-3">\n' +
+    let string_attempt = '<div class="attempt-info border ' + color_name + '">\n' +
+        '                    <a class="two-inline-blocks pb-3" href="' + url_to_attempt + '">\n' +
         '                        <div class="pl-4 pt-3">\n' +
         '                            <div class="attempt-result">\n' +
         '                                \n' +
@@ -117,8 +125,8 @@ function update_attempt(result, current_date) {
         '                        <div class="attempt-date pt-3 pr-4">\n' +
         '                            ' + current_date + '\n' +
         '                        </div>\n' +
-        '                    </div>\n' +
-        '                </a>';
+        '                    </a>\n' +
+        '                </div>';
 
     let new_attempt = document.createElement('div');
     new_attempt.innerHTML = string_attempt;

@@ -76,6 +76,7 @@ def setup_attempts_db(db: SQLAlchemy):
 
             db.session.add(new_attempt)
             db.session.commit()
+            return new_attempt.id
 
         def get_attempts(self, user_id: int, problem_id: int):
             return Attempts.query.filter(Attempts.user_id == user_id, Attempts.problem_id == problem_id)\

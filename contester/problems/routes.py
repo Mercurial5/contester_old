@@ -56,8 +56,8 @@ def save_attempt():
     post_data['accepted'] = False if post_data['status'] is False else post_data.get('accepted')
     post_data['submitted_time'] = datetime.fromtimestamp(post_data['submitted_time'])
 
-    attempts_db.save_new_attempt(user_id, post_data)
-    return {}
+    attempt_id = attempts_db.save_new_attempt(user_id, post_data)
+    return {'attempt_id': attempt_id}
 
 
 @app.route('/show_attempt/<attempt_id>', methods=['GET'])
