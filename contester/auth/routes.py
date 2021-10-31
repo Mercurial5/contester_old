@@ -38,11 +38,13 @@ def login():
         user = users_db.find_user_by_username(username)
 
         if user is None:
-            return render_template('auth/login.html')
+            alert = 'Login is incorrect'
+            return render_template('auth/login.html', alert=alert)
 
         is_password_correct = sha256_crypt.verify(password, user.password)
         if not is_password_correct:
-            return render_template('auth/login.html')
+            alert = 'Password is incorrect'
+            return render_template('auth/login.html', alert=alert)
 
         session['user'] = user.as_dict()
         return redirect(url_for('problems_bp.archive'))
@@ -68,8 +70,13 @@ def register():
         is_username_exist = users_db.find_user_by_username(username)
         is_email_exist = users_db.find_user_by_email(email)
 
-        if is_username_exist or is_email_exist:
-            return render_template('auth/register.html')
+        if is_username_exist:
+            alert = 'Username is exist'
+            return render_template('auth/register.html', alert=alert)
+        if is_email_exist:
+            alert = 'Email is used'
+            return render_template('auth/register.html', alert=alert)
+
 
         token = url_serializer.dumps(email, salt='email-confirm')
         token_link = url_for('auth_bp.confirm_email', token=token, _external=True)

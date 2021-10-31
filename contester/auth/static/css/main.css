@@ -239,7 +239,7 @@ iframe {
   display: -ms-flexbox;
   display: flex;
   flex-wrap: wrap;
-  padding: 305px 65px 40px 65px;
+  padding: 205px 65px 40px 65px;
 }
 
 .login100-form-title {
@@ -499,7 +499,7 @@ input.input100 {
   display: -ms-flexbox;
   display: flex;
   flex-wrap: wrap;
-  padding: 253px 65px 40px 65px;
+  padding: 203px 65px 40px 65px;
 }
 
 .slow-hover {
@@ -559,3 +559,14 @@ input.input100 {
 .error-attempt {
   background-color: #fbeedf;
 }
+
+.login-alert-box {
+  height: 158px;
+  width: 455px;
+}
+
+.register-alert-box {
+  height: 60px;
+  width: 455px;
+}
+
