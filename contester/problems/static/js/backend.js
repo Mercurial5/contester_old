@@ -16,15 +16,17 @@ function submitClick() {
     xhr.open("POST", "http://" + PAYLOAD.host + "/compiler/check_code");
 
     let data = JSON.stringify({
-        "problem_id": PAYLOAD.id,
+        "problem_id": PAYLOAD.problem_id,
         "code": code
     });
-
 
     xhr.send(data);
 
     xhr.onload = function() {
         let result = JSON.parse(xhr.responseText);
+
+        save_attempt(PAYLOAD.problem_id, result, code);
+
         if (result['accepted']) {
             alert("Ну чё, заебись, аккептед.");
         } else {
@@ -34,4 +36,20 @@ function submitClick() {
 
 }
 
+function save_attempt(problem_id, result, code) {
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://" + PAYLOAD.host + "/problems/save_attempt");
 
+    let data = JSON.stringify({
+        'problem_id': PAYLOAD.problem_id,
+        'status': result['status'],
+        'error': result['error'],
+        'log': result['log'],
+        'accepted': result['accepted'],
+        'failed_case': result['sample_index'],
+        'code': code,
+        'submitted_time': new Date() / 1000
+    });
+
+    xhr.send(data);
+}
