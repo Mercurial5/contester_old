@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, current_app, redirect, url_for, request
+from datetime import datetime
 import json
 
 app = Blueprint('problems_bp', __name__, template_folder='templates', static_folder='static')
@@ -51,6 +52,7 @@ def save_attempt():
 
     user_id = session['user']['id']
     post_data['accepted'] = False if post_data['status'] is False else post_data.get('accepted')
+    post_data['submitted_time'] = datetime.fromtimestamp(post_data['submitted_time'])
 
     attempts_db.save_new_attempt(user_id, post_data)
     return {}
