@@ -570,3 +570,41 @@ input.input100 {
   width: 455px;
 }
 
+@media (max-width: 992px) {
+  .register100-form {
+    width: 60%;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .login100-more {
+    width: 40%;
+  }
+}
+
+@media (max-width: 768px) {
+  .register100-form {
+    width: 100%;
+  }
+
+  .login100-more {
+    width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .register100-form {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 150px;
+  }
+
+  .rs1-wrap-input100,
+  .rs2-wrap-input100 {
+    width: 100%;
+  }
+
+  .rs2-wrap-input100 {
+    border-left: 1px solid #e6e6e6;
+  }
+}
