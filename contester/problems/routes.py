@@ -60,6 +60,16 @@ def save_attempt():
     return {}
 
 
+@app.route('/show_attempt/<attempt_id>', methods=['GET'])
+def show_attempt(attempt_id):
+    attempts_db = current_app.config['attempts.db']
+
+    attempt = attempts_db.get_attempt(attempt_id)
+
+    print(attempt.code)
+    return render_template('problems/show_attempt.html', code=attempt.code, log=attempt.log)
+
+
 def give_color_to_attempt(attempt):
     if attempt.status is False:
         color_name = 'error-attempt'
