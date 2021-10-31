@@ -54,6 +54,11 @@ def setup_attempts_db(db: SQLAlchemy):
         failed_case = db.Column(db.Integer, nullable=True)
 
     class AttemptsDBO(object):
-        pass
+        def save_new_attempt(self, user_id: int, data: dict):
+            new_attempt = Attempts(user_id, data['problem_id'], data['status'], data['error'],
+                                   data['log'], data['accepted'], data['failed_case'])
+
+            db.session.add(new_attempt)
+            db.session.commit()
 
     return AttemptsDBO()
