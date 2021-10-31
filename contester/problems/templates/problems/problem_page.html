@@ -32,23 +32,35 @@
     </div>
     <div class="side-wrapper bg-light rounded border ml-5">
         <div class="border text-center py-3">
-            <h4>Attempts: 5</h4>
+            <h4>Attempts: {{ attempt_counts }}</h4>
         </div>
-        <div class="attempt-info border">
-            <div class="two-inline-blocks pb-3">
-                <div class="pl-4 pt-3">
-                    <div class="attempt-result">
-                        Wrong answer
+        {% for attempt in attempts %}
+            <div class="attempt-info border">
+                <div class="two-inline-blocks pb-3">
+                    <div class="pl-4 pt-3">
+                        <div class="attempt-result">
+                            {% if attempt.status is false %}
+                                {{ attempt.error }}
+                            {% else %}
+                                {% if attempt.accepted %}
+                                    Accepted
+                                {% else %}
+                                    Wrong Answer
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                        <p class="failed-task pt-2">
+                            {% if attempt.accepted is false and attempt.failed_case != 0 %}
+                                Failed on case {{ attempt.failed_case }}
+                            {% endif %}
+                        </p>
                     </div>
-                    <p class="failed-task pt-2">
-                        Failed on task 4
-                    </p>
-                </div>
-                <div class="attempt-date pt-3 pr-4">
-                    2021-10-31 15:56:37
+                    <div class="attempt-date pt-3 pr-4">
+                        2021-10-31 15:56:37
+                    </div>
                 </div>
             </div>
-        </div>
+        {% endfor %}
     </div>
 
 </main> 
