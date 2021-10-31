@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 from typing import List
 
 
@@ -53,9 +54,10 @@ def setup_attempts_db(db: SQLAlchemy):
         accepted = db.Column(db.Boolean, nullable=False)
         failed_case = db.Column(db.Integer, nullable=True)
         code = db.Column(db.Text, nullable=False)
+        submitted_time = db.Column(db.DateTime, nullable=False)
 
         def __init__(self, user_id: int, problem_id: int, status: bool, error: str, log: str, accepted: bool,
-                     failed_case: int, code: str):
+                     failed_case: int, code: str, submitted_time: datetime):
             self.user_id = user_id
             self.problem_id = problem_id
             self.status = status
@@ -64,11 +66,13 @@ def setup_attempts_db(db: SQLAlchemy):
             self.accepted = accepted
             self.failed_case = failed_case
             self.code = code
+            self.submitted_time = submitted_time
 
     class AttemptsDBO(object):
         def save_new_attempt(self, user_id: int, data: dict):
             new_attempt = Attempts(user_id, data['problem_id'], data['status'], data.get('error'),
-                                   data.get('log'), data['accepted'], data.get('failed_case', 0), data['code'])
+                                   data.get('log'), data['accepted'], data.get('failed_case', 0),
+                                   data['code'], data['submitted_time'])
 
             db.session.add(new_attempt)
             db.session.commit()
