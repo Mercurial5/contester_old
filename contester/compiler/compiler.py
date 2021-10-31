@@ -33,7 +33,6 @@ class Compiler:
         }
 
     def compile(self, input_values: List[str] = []):
-
         command = [self.absolute_path_to_runner]
         program = subprocess.Popen(command, shell=True, stderr=subprocess.PIPE, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
         for value in input_values:

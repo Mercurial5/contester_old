@@ -30,7 +30,7 @@ def check_code():
 
         accepted = False
         for output_case in output_cases:
-            if result['answer'].strip() == output_case:
+            if result['answer'].strip() == output_case.strip():
                 accepted = True
 
         if accepted is False:
