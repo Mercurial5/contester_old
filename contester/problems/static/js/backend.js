@@ -13,7 +13,7 @@ function submitClick() {
     }
 
     let current_date = new Date();
-    add_attempt(current_date);
+    add_attempt(get_date_from_Date(current_date));
 
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "http://" + PAYLOAD.host + "/compiler/check_code");
@@ -36,7 +36,7 @@ function submitClick() {
             alert("Лох))0)");
         }
 
-        update_attempt(result, current_date);
+        update_attempt(result, get_date_from_Date(current_date));
     }
 
 }
@@ -60,8 +60,6 @@ function save_attempt(problem_id, result, current_timestamp, code) {
 }
 
 function add_attempt(current_date) {
-    let current_time = current_date.getFullYear() + '-' + (current_date.getMonth() + 1) + '-' + current_date.getDate();
-    current_date = current_time + ' ' + current_date.getHours() + ':' + current_date.getMinutes() + ':' + current_date.getMinutes();
     let string_attempt = '<div class="attempt-info border">\n' +
         '                    <div class="two-inline-blocks pb-3">\n' +
         '                        <div class="pl-4 pt-3">\n' +
@@ -91,28 +89,27 @@ function add_attempt(current_date) {
 }
 
 function update_attempt(result, current_date) {
-    let current_time = current_date.getFullYear() + '-' + (current_date.getMonth() + 1) + '-' + current_date.getDate();
-    current_date = current_time + ' ' + current_date.getHours() + ':' + current_date.getMinutes() + ':' + current_date.getMinutes();
-
     let attempts_block = document.getElementById('attempts-wrapper');
     let last_attempt = attempts_block.firstChild;
 
-    console.log(result);
-
     let first_message = undefined;
     let failed_case = '';
+    let color_name = '';
     if (result['status'] === false) {
         first_message = result['error'];
+        color_name = 'error-attempt';
     } else {
         if (result['accepted'] === true) {
             first_message = 'Accepted';
+            color_name = 'accepted-attempt'
         } else {
             first_message = 'Wrong Answer';
             failed_case = 'Failed on case ' + result['sample_index'];
+            color_name = 'wrong-attempt';
         }
     }
 
-    let string_attempt = '<div class="attempt-info border">\n' +
+    let string_attempt = '<div class="attempt-info border ' + color_name + '">\n' +
         '                    <div class="two-inline-blocks pb-3">\n' +
         '                        <div class="pl-4 pt-3">\n' +
         '                            <div class="attempt-result">\n' +
@@ -133,7 +130,14 @@ function update_attempt(result, current_date) {
     let new_attempt = document.createElement('div');
     new_attempt.innerHTML = string_attempt;
     last_attempt.replaceWith(new_attempt);
-
-
 }
 
+function get_date_from_Date(current_date) {
+    let current_time = current_date.getFullYear() + '-' + addZeroBefore(current_date.getMonth() + 1) + '-' + addZeroBefore(current_date.getDate());
+    current_date = current_time + ' ' + addZeroBefore(current_date.getHours()) + ':' + addZeroBefore(current_date.getMinutes()) + ':' + addZeroBefore(current_date.getMinutes());
+    return current_date;
+}
+
+function addZeroBefore(n) {
+  return (n < 10 ? '0' : '') + n;
+}
