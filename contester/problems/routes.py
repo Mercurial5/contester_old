@@ -27,10 +27,13 @@ def problem_page(problem_id):
         return redirect(url_for('auth_bp.login'))
 
     problems_db = current_app.config['problems.db']
+    samples_db = current_app.config['samples.db']
 
     user = session['user']
     problem = problems_db.get_problem_by_id(problem_id)
 
+    samples = samples_db.get_first_n_samples(problem_id, problem.samples_count)
+
     payload = json.dumps({'id': problem.id, 'host': request.host})
 
-    return render_template('problems/problem_page.html', problem=problem, user=user, payload=payload, host=request.host)
+    return render_template('problems/problem_page.html', problem=problem, user=user, samples=samples, payload=payload)
