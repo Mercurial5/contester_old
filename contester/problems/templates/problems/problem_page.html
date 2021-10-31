@@ -41,7 +41,7 @@
         <div id="attempts-wrapper">
             {% for attempt in attempts %}
                 <div class="attempt-info border {{ attempt.color_name }}">
-                    <div class="two-inline-blocks pb-3">
+                    <a class="two-inline-blocks pb-3" href="{{ url_for('problems_bp.show_attempt', attempt_id=attempt.id) }}">
                         <div class="pl-4 pt-3">
                             <div class="attempt-result">
                                 {% if attempt.status is false %}
@@ -63,7 +63,7 @@
                         <div class="attempt-date pt-3 pr-4">
                             {{ attempt.submitted_time }}
                         </div>
-                    </div>
+                    </a>
                 </div>
             {% endfor %}
         </div>
