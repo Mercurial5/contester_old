@@ -40,6 +40,10 @@ function save_attempt(problem_id, result, code) {
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "http://" + PAYLOAD.host + "/problems/save_attempt");
 
+    let today = new Date();
+    let current_date = today.getFullYear() + '-' + today.getMonth() + '-' + today.getDate();
+    let current_time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+
     let data = JSON.stringify({
         'problem_id': PAYLOAD.problem_id,
         'status': result['status'],
@@ -47,7 +51,8 @@ function save_attempt(problem_id, result, code) {
         'log': result['log'],
         'accepted': result['accepted'],
         'failed_case': result['sample_index'],
-        'code': code
+        'code': code,
+        'submitted_date': current_date + ' ' + current_time
     });
 
     xhr.send(data);
