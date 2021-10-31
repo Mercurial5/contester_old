@@ -52,11 +52,23 @@ def setup_attempts_db(db: SQLAlchemy):
         log = db.Column(db.Text, nullable=True)
         accepted = db.Column(db.Boolean, nullable=False)
         failed_case = db.Column(db.Integer, nullable=True)
+        code = db.Column(db.Text, nullable=False)
+
+        def __init__(self, user_id: int, problem_id: int, status: bool, error: str, log: str, accepted: bool,
+                     failed_case: int, code: str):
+            self.user_id = user_id
+            self.problem_id = problem_id
+            self.status = status
+            self.error = error
+            self.log = log
+            self.accepted = accepted
+            self.failed_case = failed_case
+            self.code = code
 
     class AttemptsDBO(object):
         def save_new_attempt(self, user_id: int, data: dict):
-            new_attempt = Attempts(user_id, data['problem_id'], data['status'], data['error'],
-                                   data['log'], data['accepted'], data['failed_case'])
+            new_attempt = Attempts(user_id, data['problem_id'], data['status'], data.get('error'),
+                                   data.get('log'), data['accepted'], data.get('failed_case', 0), data['code'])
 
             db.session.add(new_attempt)
             db.session.commit()
