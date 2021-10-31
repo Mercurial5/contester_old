@@ -516,8 +516,7 @@ input.input100 {
 
 .problem-wrapper {
   width: 1000px;
-  height: 1200px;
-
+  min-height: 950px;
 }
 
 .side-wrapper {
@@ -547,4 +546,16 @@ input.input100 {
 .two-inline-blocks {
   display: flex;
   justify-content: space-between;
+}
+
+.wrong-attempt {
+  background-color: #fde4e4;
+}
+
+.accepted-attempt {
+  background-color: #c4efd7;
+}
+
+.error-attempt {
+  background-color: #fbeedf;
 }

@@ -78,9 +78,13 @@ def setup_attempts_db(db: SQLAlchemy):
             db.session.commit()
 
         def get_attempts(self, user_id: int, problem_id: int):
-            return Attempts.query.filter(Attempts.user_id == user_id, Attempts.problem_id == problem_id).limit(10).all()
+            return Attempts.query.filter(Attempts.user_id == user_id, Attempts.problem_id == problem_id)\
+                .order_by(Attempts.id.desc()).limit(10).all()
 
         def get_attempts_count(self, user_id: int, problem_id: int):
             return Attempts.query.filter(Attempts.user_id == user_id, Attempts.problem_id == problem_id).count()
+
+        def get_attempt(self, attempt_id: int):
+            return Attempts.query.filter(Attempts.id == attempt_id).first()
 
     return AttemptsDBO()
