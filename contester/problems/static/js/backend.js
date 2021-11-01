@@ -135,7 +135,7 @@ function update_attempt(result, current_date, attempt_id) {
 
 function get_date_from_Date(current_date) {
     let current_time = current_date.getFullYear() + '-' + addZeroBefore(current_date.getMonth() + 1) + '-' + addZeroBefore(current_date.getDate());
-    current_date = current_time + ' ' + addZeroBefore(current_date.getHours()) + ':' + addZeroBefore(current_date.getMinutes()) + ':' + addZeroBefore(current_date.getMinutes());
+    current_date = current_time + ' ' + addZeroBefore(current_date.getHours()) + ':' + addZeroBefore(current_date.getMinutes()) + ':' + addZeroBefore(current_date.getSeconds());
     return current_date;
 }
 
